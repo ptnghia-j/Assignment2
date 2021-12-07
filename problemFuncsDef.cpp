@@ -19,15 +19,17 @@ void *problem_1 (void *parameter) {
     */
     char *data = (char *) parameter;
     size_t found = std::string(data).find(",");
-
-    std::string freeMemoryInfo = std::string(data).substr(0, found);
-    std::string processesInfo = std::string(data).substr(found + 1);
+    if (found != std::string::npos) {
+    	std::string freeMemoryInfo = std::string(data).substr(0, found);
+    	std::string processesInfo = std::string(data).substr(found + 1);
+    }
 
     std::stringstream freeMemory(data);
 		
     std::vector<Block> freeMemoryList;
-    int size;
+    std::string sizeString;
     while(freeMemory >> size) {
+	int size = std::stoi(sizeString);
         if (size > 0) {
             Block block(size);
             freeMemoryList.push_back(block);
@@ -37,8 +39,9 @@ void *problem_1 (void *parameter) {
     std::stringstream processes(processesInfo);
     std::vector<Process> processesList;
     std::string pid;
-    int size;
+    std::string size;
     while (processes >> pid >> size) {
+	int size = std::stoi(sizeString);
         Process process(pid, size);
         processesList.push_back(process);
     }
