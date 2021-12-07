@@ -14,8 +14,38 @@
 #include "assignment2.h"
 
 void *problem_1 (void *parameter) {
-    std::cout << "Problem 1" << std::endl;
-    std::cout << "Received data: " << (char *) parameter << std::endl;
+    /*
+    This function implements first fit policy for memory allocation.
+    */
+    char *data = (char *) parameter;
+    size_t found = std::string(data).find(",");
+
+    std::string freeMemoryInfo = std::string(data).substr(0, found);
+    std::string processesInfo = std::string(data).substr(found + 1);
+
+    std::stringstream freeMemory(data);
+		
+    std::vector<Block> freeMemoryList;
+    int size;
+    while(freeMemory >> size) {
+        if (size > 0) {
+            Block block(size);
+            freeMemoryList.push_back(block);
+        }
+    }
+
+    std::stringstream processes(processesInfo);
+    std::vector<Process> processesList;
+    std::string pid;
+    int size;
+    while (processes >> pid >> size) {
+        Process process(pid, size);
+        processesList.push_back(process);
+    }
+
+    //for each process, find the first block that is big enough to hold it
+    
+    
     return NULL;
 }
 
