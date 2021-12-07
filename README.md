@@ -8,7 +8,7 @@ Allocation (Q2-4)
 - Strategy
 
 Memory Address (Q5)
-- Table information (segment-length pairs)
+- Table information (base-length pairs)
 - Desired segment and offset
 
 Create Question objects based on these inputted data
