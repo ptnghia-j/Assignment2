@@ -2,36 +2,40 @@
 #include <mutex>
 #include <iostream>
 #include <vector>
+#include "Solver.h"
 // #include "assignment2.h"
 
 using namespace std;
 
+mutex printLock;
+
 // -- PLACEHOLDER CLASSES -- //
-struct MemAllocQuestion
-{
-    
-};
-class MemAllocSolver
+struct MemAllocQuestion{};
+class MemAllocSolver: Solver
 {
 public:
     // store the question
-    MemAllocSolver(MemAllocQuestion)
+    MemAllocSolver(MemAllocQuestion) {}
+    string solve()
     {
-
-    }
-    void solve()
-    {
-
+        // finished, print safely
+        return "Final results!";
     }
 };
 
 // MemoryAllocation thread
-void solveMemoryAlloc(vector<MemAllocQuestion> vec)
+void* solveMemoryAlloc(void* vec)
 {
-    for (auto q : vec)
+    vector<MemAllocQuestion>* questions = (vector<MemAllocQuestion>*) vec;
+    for (auto q : *questions)
     {
         MemAllocSolver solver(q);
-        solver.solve();
+        string result = solver.solve();
+
+        // finished, print safely
+        printLock.lock();
+        cout << result;
+        printLock.unlock();
     }
 }
 
@@ -50,7 +54,7 @@ int main()
         cout << "Choose: ";
         cin >> input;
         int choice = stoi(input);
-        cout << "Chose " << choice << "\n";
+        cout << "Chose " << choice << ".\n";
         switch(choice)
         {
             case 1: // Free space after allocation
@@ -60,7 +64,10 @@ int main()
         }
     }
 endInput:
-    // SOLVE
+    // SOLVE AND PRINT
     cout << "Solving created problems...";
+    pthread_t thr[2];
+    pthread_create(&thr[0], NULL, solveMemoryAlloc, (void*) &memQuestions);
+
     return 0;
 }

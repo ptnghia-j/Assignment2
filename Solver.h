@@ -9,7 +9,7 @@ class Solver {
 public:
     // Returns a string that tells the result.
     // This string will be used in final output.
-    virtual std::string solve();
+    virtual std::string solve() {}
 };
 
 #endif // Solver_h
