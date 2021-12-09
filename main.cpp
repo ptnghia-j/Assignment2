@@ -3,33 +3,20 @@
 #include <iostream>
 #include <vector>
 #include "Solver.h"
-// #include "assignment2.h"
+
+#include "Allocation.hpp"
 
 using namespace std;
 
 mutex printLock;
 
-// -- PLACEHOLDER CLASSES -- //
-struct MemAllocQuestion{};
-class MemAllocSolver: Solver
-{
-public:
-    // store the question
-    MemAllocSolver(MemAllocQuestion) {}
-    string solve()
-    {
-        // finished, print safely
-        return "Final results!";
-    }
-};
-
 // MemoryAllocation thread
 void* solveMemoryAlloc(void* vec)
 {
-    vector<MemAllocQuestion>* questions = (vector<MemAllocQuestion>*) vec;
+    vector<memAllocationProblem>* questions = (vector<memAllocationProblem>*) vec;
     for (auto q : *questions)
     {
-        MemAllocSolver solver(q);
+        memAllocation solver(q);
         string result = solver.solve();
 
         // finished, print safely
@@ -41,7 +28,7 @@ void* solveMemoryAlloc(void* vec)
 
 int main()
 {
-    vector<MemAllocQuestion> memQuestions;
+    vector<memAllocationProblem> memQuestions;
     
     // USER INPUT
     while(true)
@@ -50,24 +37,65 @@ int main()
         cout << "Which question type to add?\n";
         cout << "1. Free space after memory allocation\n";
         cout << "2. Virtual memory translation\n";
-        cout << "3. Solve and exit\n";
+        cout << "3. Solve what we have and exit\n";
         cout << "Choose: ";
         cin >> input;
         int choice = stoi(input);
-        cout << "Chose " << choice << ".\n";
+
         switch(choice)
         {
             case 1: // Free space after allocation
+            {
+                vector<int> freeSpaces;
+                vector<int> processes;
+                cout << "Free space blocks available... (press enter after each entry; -1 to stop)" << endl;
+                while(true)
+                {
+                    cin >> input;
+                    int in = stoi(input);
+                    if (in == -1)
+                        break;
+                    freeSpaces.push_back(in);
+                }
+                cout << "Processes' requested space... (press enter after each entry; -1 to stop)" << endl;
+                while(true)
+                {
+                    cin >> input;
+                    int in = stoi(input);
+                    if (in == -1)
+                        break;
+                    processes.push_back(in);
+                }
+                cout << "Solving Policy...\n" 
+                     << "1. First Fit\n"
+                     << "2. Best Fit\n"
+                     << "3. Worst Fit\n";
+                cout << "Enter your choice: ";
+
+                int solvePolicy;
+                cin >> solvePolicy;
+
+                memAllocationProblem q;
+                q.memoryAvailable = freeSpaces;
+                q.processes = processes;
+                q.method = (Method)solvePolicy;
+                memQuestions.push_back(q);
+
+                cout << "\"Free space after allocation\" problem added.\n\n";
+            }
             case 2: // Virtual memory address translation
-            case 3:
+                break;
+            case 3: // Exit input mode
+                cout << endl << endl;
                 goto endInput;
         }
     }
 endInput:
     // SOLVE AND PRINT
-    cout << "Solving created problems...";
+    cout << "Solving created problems...\n";
     pthread_t thr[2];
     pthread_create(&thr[0], NULL, solveMemoryAlloc, (void*) &memQuestions);
+    pthread_join(thr[0], NULL);
 
     return 0;
 }
