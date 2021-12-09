@@ -63,7 +63,7 @@ std::string solveBestFit(std::vector<int> availableBlock, std::vector<int> proce
 
         int index = 0;
         int minIndex = -1;
-        int minSize = 0;
+        int minSize = processList[0];
         while (index < availableBlock.size()) {
             if (availableBlock[index] >= processSize && availableBlock[index] < minSize) {
                 minIndex = index;
