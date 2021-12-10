@@ -48,8 +48,7 @@ std::string solveFirstFit(std::vector<int> availableBlock, std::vector<int> proc
     {
         totalFreeRemaining += size;
     }
-    result += ("First fit solver finished.\nTotal memory remaining: " + std::to_string(totalFreeRemaining) + "\n\n");
-    return result;
+    return "First fit solver finished.\nTotal memory remaining: " + std::to_string(totalFreeRemaining);
 }
 
 std::string solveBestFit(std::vector<int> availableBlock, std::vector<int> processList) {
@@ -91,8 +90,7 @@ std::string solveBestFit(std::vector<int> availableBlock, std::vector<int> proce
     {
         totalFreeRemaining += size;
     }
-    result += ("Best fit solver finished.\nTotal memory remaining: " + std::to_string(totalFreeRemaining) + "\n\n");
-    return result;
+    return "Best fit solver finished.\nTotal memory remaining: " + std::to_string(totalFreeRemaining);
 }
 
 std::string solveWorstFit(std::vector<int> availableBlock, std::vector<int> processList) {
@@ -134,8 +132,7 @@ std::string solveWorstFit(std::vector<int> availableBlock, std::vector<int> proc
     {
         totalFreeRemaining += size;
     }
-    result += ("Worst fit solver finished.\nTotal memory remaining: " + std::to_string(totalFreeRemaining) + "\n\n");
-    return result;
+    return "Worst fit solver finished.\nTotal memory remaining: " + std::to_string(totalFreeRemaining);
 }
 
 std::string memAllocation::solve() {

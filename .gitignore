@@ -2,3 +2,5 @@
 *.out
 *.gch
 *.swp
+*.o
+assign2

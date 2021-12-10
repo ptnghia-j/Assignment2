@@ -1,7 +1,7 @@
 all: assign2
 
 assign2: Allocation.o Translation.o main.o
-		g++ Allocation.o Translation.o main.o -lrt -lpthread -o assign2 
+		g++ Allocation.o Translation.o main.o -lpthread -o assign2 
 
 
 Allocation.o : Allocation.cpp
