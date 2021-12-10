@@ -10,7 +10,7 @@ Nghia
 Evan
 - Memory address translation
 
-dns
+Christos
 - Coding assistance
 - Makefile
 - PDF assembly
