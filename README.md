@@ -2,18 +2,18 @@
 
 Alex
 - main (user input, threading)
+- PDF assembly
 
 Nghia
 - GitHub repo
 - Memory allocation
 
 Evan
-- Memory address translation
+- Memory address translation (logic)
 
 Christos
-- Coding assistance
+- Memory address translation (solver class, content in main)
 - Makefile
-- PDF assembly
 
 ### App Flow
 
