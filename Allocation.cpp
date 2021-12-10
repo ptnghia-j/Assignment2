@@ -61,7 +61,7 @@ std::string solveBestFit(std::vector<int> availableBlock, std::vector<int> proce
         int processSize = processList[i];
 
         int index = 0;
-        int minIndex = -1;
+        int minIndex = 0;
         int minSize = processList[0];
         while (index < availableBlock.size()) {
             if (availableBlock[index] >= processSize && availableBlock[index] < minSize) {
@@ -71,12 +71,12 @@ std::string solveBestFit(std::vector<int> availableBlock, std::vector<int> proce
             index++;
         }
 
-        if (minIndex != -1 && minSize != 0) {
-            result += "Process with size of " + std::to_string(processSize) 
-                    + " is allocated to block " + std::to_string(index) + "\n";
+        if (minSize != 0) {
+//             result += "Process with size of " + std::to_string(processSize) 
+//                     + " is allocated to block " + std::to_string(index) + "\n";
             
             availableBlock[minIndex] -= processSize;
-            result += "Remaining memory for block " + std::to_string(minIndex) + ": " + std::to_string(availableBlock[minIndex]) + "\n";
+//             result += "Remaining memory for block " + std::to_string(minIndex) + ": " + std::to_string(availableBlock[minIndex]) + "\n";
         } 
         else {
             result += " Found no block large enough to hold process with size of " + std::to_string(processSize) 
@@ -136,41 +136,15 @@ std::string solveWorstFit(std::vector<int> availableBlock, std::vector<int> proc
 }
 
 std::string memAllocation::solve() {
-
-    // std::cout << "Solving Policy ... " << std::endl;
-    // std::cout << "1. First Fit" << std::endl;
-    // std::cout << "2. Best Fit" << std::endl;
-    // std::cout << "3. Worst Fit" << std::endl;
-
-    // std::cout << "Enter your choice: ";
-    // int choice;
-    // std::cin >> choice;
-
     std::string result;
 
     bool isDone = false;
     while (!isDone) {
-
-        std::vector<int> availableBlock = problem->memoryAvailable;
-        std::vector<int> processList = problem->processes;
-
-
-        //show the size of current available memory and the process list with processes' size
-        // std::cout << GREEN << "Available Memory: " << RESET << std::endl;
-        // for (int i = 0; i < availableBlock.size(); i++) {
-        //     std::cout << i << ". " << availableBlock[i] << std::endl;
-        // }
-        // std::cout << "===============================================" << std::endl;
-
-        // std::cout << GREEN << "Process List: " << RESET << std::endl;
-        // for (int i = 0; i < processList.size(); i++) {
-        //     std::cout << i << ". Pid: " << processList[i].first << " Memory needed: " << processList[i].second << std::endl;
-        // }
-        // std::cout << "===============================================" << std::endl;
+        std::vector<int> availableBlock = problem->getMemoryAvailable();
+        std::vector<int> processList = problem->getProcesses();
 
 
-        // std::cout << "Solving by method " << problem->method << std::endl;
-        switch(problem->method) {
+        switch(problem->getMethod()) {
             case firstFit: result = solveFirstFit(availableBlock, processList);
                     break;
             case bestFit: result = solveBestFit(availableBlock, processList);
@@ -185,4 +159,3 @@ std::string memAllocation::solve() {
 
     }
 }
-
