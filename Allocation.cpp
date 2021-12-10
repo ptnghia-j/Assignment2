@@ -137,40 +137,16 @@ std::string solveWorstFit(std::vector<int> availableBlock, std::vector<int> proc
 
 std::string memAllocation::solve() {
 
-    // std::cout << "Solving Policy ... " << std::endl;
-    // std::cout << "1. First Fit" << std::endl;
-    // std::cout << "2. Best Fit" << std::endl;
-    // std::cout << "3. Worst Fit" << std::endl;
-
-    // std::cout << "Enter your choice: ";
-    // int choice;
-    // std::cin >> choice;
-
     std::string result;
 
     bool isDone = false;
     while (!isDone) {
 
-        std::vector<int> availableBlock = problem->memoryAvailable;
-        std::vector<int> processList = problem->processes;
+        std::vector<int> availableBlock = problem->getMemoryAvailable();
+        std::vector<int> processList = problem->getProcesses();
 
 
-        //show the size of current available memory and the process list with processes' size
-        // std::cout << GREEN << "Available Memory: " << RESET << std::endl;
-        // for (int i = 0; i < availableBlock.size(); i++) {
-        //     std::cout << i << ". " << availableBlock[i] << std::endl;
-        // }
-        // std::cout << "===============================================" << std::endl;
-
-        // std::cout << GREEN << "Process List: " << RESET << std::endl;
-        // for (int i = 0; i < processList.size(); i++) {
-        //     std::cout << i << ". Pid: " << processList[i].first << " Memory needed: " << processList[i].second << std::endl;
-        // }
-        // std::cout << "===============================================" << std::endl;
-
-
-        // std::cout << "Solving by method " << problem->method << std::endl;
-        switch(problem->method) {
+        switch(problem->getMethod()) {
             case firstFit: result = solveFirstFit(availableBlock, processList);
                     break;
             case bestFit: result = solveBestFit(availableBlock, processList);
