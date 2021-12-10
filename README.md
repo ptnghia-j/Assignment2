@@ -1,6 +1,23 @@
-__App Flow__
+### Duties
 
-### 1. User Input
+Alex
+- main (user input, threading)
+- PDF assembly
+
+Nghia
+- GitHub repo
+- Memory allocation
+
+Evan
+- Memory address translation (logic)
+
+Christos
+- Memory address translation (solver class, content in main)
+- Makefile
+
+### App Flow
+
+**1. User Input**
 
 Allocation (Q2-4)
 - Free spaces available, separated by commas  
@@ -13,6 +30,6 @@ Memory Address (Q5)
 
 Create Question objects based on these inputted data
 
-### 2. Threads kick off
+**2. Threads kick off**
 - Each solver will work in their own threads, called by their `solve()` method
-- Whoever finishes first will lock the mutex, print, then unlock
+- Whatever thread finishes first will lock the mutex, print, then unlock

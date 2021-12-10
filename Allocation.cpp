@@ -136,12 +136,10 @@ std::string solveWorstFit(std::vector<int> availableBlock, std::vector<int> proc
 }
 
 std::string memAllocation::solve() {
-
     std::string result;
 
     bool isDone = false;
     while (!isDone) {
-
         std::vector<int> availableBlock = problem->getMemoryAvailable();
         std::vector<int> processList = problem->getProcesses();
 

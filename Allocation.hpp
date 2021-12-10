@@ -35,7 +35,6 @@ private:
     std::vector<int> memoryAvailable;
     std::vector<int> processes;
     Method method;
-
 };
 
 class memAllocation: Solver {
