@@ -2,9 +2,10 @@
 #include <mutex>
 #include <iostream>
 #include <vector>
-#include "Solver.h"
 
+#include "Solver.h"
 #include "Allocation.hpp"
+#include "Translation.hpp"
 
 using namespace std;
 
@@ -19,17 +20,28 @@ void* solveMemoryAlloc(void* vec)
         memAllocation solver(q);
         string result = solver.solve();
 
-        // finished, print safely
         printLock.lock();
         cout << result;
         printLock.unlock();
     }
 }
 
+
+void* solveTranslation(void* vec){
+	vector<translationProblem>* questions = (vector<translationProblem>*) vec;
+	for(auto q: *questions){
+		translation solver(q);
+		string result = solver.solve();
+		printLock.lock();
+		cout << result << "\n";
+		printLock.unlock();
+	}
+}
 int main()
 {
     vector<memAllocationProblem> memQuestions;
-    
+    vector<translationProblem> translationProblems;
+ 
     // USER INPUT
     while(true)
     {
@@ -82,10 +94,25 @@ int main()
                 memQuestions.push_back(q);
 
                 cout << "\"Free space after allocation\" problem added.\n\n";
+		break;
             }
             case 2: // Virtual memory address translation
-                break;
-            case 3: // Exit input mode
+		{
+                int segmentId, logicalAddress;
+		cout << "Given a segment table of\nSeg ID  Base   Length\n1       200    600\n2       2300   20\n3       1200   100\nEnter a segment ID:\n";
+		cin >> input;
+		segmentId = stoi(input);
+		cout << "Enter a logical address to be translated:\n";
+		cin >> input;
+		logicalAddress = stoi(input);
+		translationProblem q;
+		q.segmentId = segmentId;
+		q.logicalAddress = logicalAddress;
+		translationProblems.push_back(q);
+		cout << "\"Virtual memory translation\" problem added.\n\n";
+       	   	break;
+	     }
+	     case 3: // Exit input mode
                 cout << endl << endl;
                 goto endInput;
         }
@@ -94,7 +121,9 @@ endInput:
     // SOLVE AND PRINT
     cout << "Solving created problems...\n";
     pthread_t thr[2];
+
     pthread_create(&thr[0], NULL, solveMemoryAlloc, (void*) &memQuestions);
+    pthread_create(&thr[0], NULL, solveTranslation, (void*) &translationProblems);
     pthread_join(thr[0], NULL);
 
     return 0;

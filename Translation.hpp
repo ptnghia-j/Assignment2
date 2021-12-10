@@ -7,7 +7,7 @@
 using namespace std;
 
 struct translationProblem {
-	int segmentId, logicalAddress, physicalAddress;
+	int segmentId, logicalAddress;
 	int base[3] = {200, 2300, 1200};
 	int length[3] = {600, 20, 100};
 };

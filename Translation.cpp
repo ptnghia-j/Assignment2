@@ -8,11 +8,17 @@ using namespace std;
 string translation::solve(){
 	string result;
 	int physicalAddress;
-	if(problem->logicalAddress <= problem->length[problem->segmentId - 1])
-		physicalAddress = problem->logicalAddress + problem->base[problem->segmentId];
-	else{
-		result = "Logical address is larger than the length of the segment ID";
+	if(problem->logicalAddress <= problem->length[problem->segmentId-1]){
+		physicalAddress = problem->logicalAddress + problem->base[problem->segmentId-1];
+		result = "Physical address: " + to_string(physicalAddress);
 	}
+
+	else{
+		result = "Logical address is larger than the length of the segment ID\n";
+	}
+
 	return result;
 }
+
+
 
