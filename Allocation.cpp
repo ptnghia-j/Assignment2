@@ -71,12 +71,12 @@ std::string solveBestFit(std::vector<int> availableBlock, std::vector<int> proce
             index++;
         }
 
-        if (minIndex != -1 && minSize != 0) {
-            result += "Process with size of " + std::to_string(processSize) 
-                    + " is allocated to block " + std::to_string(index) + "\n";
+        if (minSize != 0) {
+//             result += "Process with size of " + std::to_string(processSize) 
+//                     + " is allocated to block " + std::to_string(index) + "\n";
             
             availableBlock[minIndex] -= processSize;
-            result += "Remaining memory for block " + std::to_string(minIndex) + ": " + std::to_string(availableBlock[minIndex]) + "\n";
+//             result += "Remaining memory for block " + std::to_string(minIndex) + ": " + std::to_string(availableBlock[minIndex]) + "\n";
         } 
         else {
             result += " Found no block large enough to hold process with size of " + std::to_string(processSize) 
