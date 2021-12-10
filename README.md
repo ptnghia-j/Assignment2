@@ -2,7 +2,7 @@
 
 Alex
 - main (user input, threading)
-- Makefile
+- PDF assembly
 
 Nghia
 - GitHub repo
@@ -13,7 +13,7 @@ Evan
 
 dns
 - Memory address translation
-- PDF assembly
+- Makefile
 
 ### App Flow
 
