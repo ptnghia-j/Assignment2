@@ -1,12 +1,3 @@
-//#include <sys/types.h>
-//#include <sys/wait.h>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <unistd.h>
-//#include <string.h>
-//#include <pthread.h>
-//#include <stdlib.h>
-//#include <mutex>
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -32,14 +23,11 @@ std::string solveFirstFit(std::vector<int> availableBlock, std::vector<int> proc
         }
 
         if (isFound) {
-            // result += "Process with size of " + std::to_string(processSize) 
-            //         + " is allocated to block " + std::to_string(index) + "\n";
-            
             availableBlock[index] -= processSize;
-            // result += "Remaining memory for block " + std::to_string(index) + ": " + std::to_string(availableBlock[index]) + "\n";
-        } else {
-            // result += " Found no block large enough to hold process with size of " + std::to_string(processSize) 
-            //         + " under first fit policy \n";
+        }
+        else {
+            result += " Found no block large enough to hold process with size of " + std::to_string(processSize) 
+                    + " \n under worst fit policy \n";
         }
     }
 
@@ -72,11 +60,7 @@ std::string solveBestFit(std::vector<int> availableBlock, std::vector<int> proce
         }
 
         if (minSize != 0) {
-//             result += "Process with size of " + std::to_string(processSize) 
-//                     + " is allocated to block " + std::to_string(index) + "\n";
-            
             availableBlock[minIndex] -= processSize;
-//             result += "Remaining memory for block " + std::to_string(minIndex) + ": " + std::to_string(availableBlock[minIndex]) + "\n";
         } 
         else {
             result += " Found no block large enough to hold process with size of " + std::to_string(processSize) 
@@ -115,15 +99,11 @@ std::string solveWorstFit(std::vector<int> availableBlock, std::vector<int> proc
         }
 
         if (maxIndex != -1 && maxSize != 0) {
-            // result += "Process with size of " + std::to_string(processSize) 
-            //         + " is allocated to block " + std::to_string(index) + "\n";
-            
             availableBlock[maxIndex] -= processSize;
-            // result += "Remaining memory for block " + std::to_string(maxIndex) + ": " + std::to_string(availableBlock[maxIndex]) + "\n";
         } 
         else {
-            // result += " Found no block large enough to hold process with size of " + std::to_string(processSize) 
-            //         + " \n under worst fit policy \n";
+            result += " Found no block large enough to hold process with size of " + std::to_string(processSize) 
+                    + " \n under worst fit policy \n";
         }
     }
 

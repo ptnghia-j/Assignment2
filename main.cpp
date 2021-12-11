@@ -23,10 +23,10 @@ void *solveMemoryAlloc(void *vec)
         printLock.lock();
         cout << "---------------" << endl;
         cout << "Free space: ";
-        for (auto free: q.memoryAvailable)
+        for (auto free : q.getMemoryAvailable())
             cout << free << " ";
         cout << "\nProcesses: ";
-        for (auto requested: q.processes)
+        for (auto requested : q.getProcesses())
             cout << requested << " ";
         cout << "\n" << result << endl;
         cout << "---------------" << "\n\n";
@@ -44,7 +44,7 @@ void *solveTranslation(void *vec)
 
         printLock.lock();
         cout << "---------------" << endl;
-        cout << "ID" << q.segmentId << " + " << q.logicalAddress << endl;
+        cout << "ID" << q.getSegmentID() << " + " << q.getLogicalAddress() << endl;
         cout << result << endl;
         cout << "---------------" << "\n\n";
         printLock.unlock();
@@ -101,9 +101,9 @@ int main()
             cin >> solvePolicy;
 
             memAllocationProblem q;
-            q.memoryAvailable = freeSpaces;
-            q.processes = processes;
-            q.method = (Method)solvePolicy;
+            q.setMemoryAvailable(freeSpaces);
+            q.setProcesses(processes);
+            q.setMethod((Method)solvePolicy);
             memQuestions.push_back(q);
 
             cout << "\"Free space after allocation\" problem added.\n\n";
@@ -119,8 +119,8 @@ int main()
             cin >> input;
             logicalAddress = stoi(input);
             translationProblem q;
-            q.segmentId = segmentId;
-            q.logicalAddress = logicalAddress;
+            q.setSegmentID(segmentId);
+            q.setLogicalAddress(logicalAddress);
             translationProblems.push_back(q);
             cout << "\"Virtual memory translation\" problem added.\n\n";
             break;

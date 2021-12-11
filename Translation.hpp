@@ -7,9 +7,23 @@
 using namespace std;
 
 struct translationProblem {
+private:
 	int segmentId, logicalAddress;
-	int base[3] = {200, 2300, 1200};
-	int length[3] = {600, 20, 100};
+public:
+	const int base[3] = {200, 2300, 1200};
+	const int length[3] = {600, 20, 100};
+	int getSegmentID(){
+		return segmentId;
+	}
+	int getLogicalAddress(){
+		return logicalAddress;
+	}
+	int setSegmentID(int newId){
+		segmentId = newId;
+	}
+	int setLogicalAddress(int newAddr){
+		logicalAddress = newAddr;
+	}
 };
 
 class	translation: Solver {

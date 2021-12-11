@@ -11,8 +11,8 @@ string translation::solve(){
 	//placeholder int
 	int physicalAddress;
 	//Finding the physical address
-	if(problem->logicalAddress <= problem->length[problem->segmentId-1]){
-		physicalAddress = problem->logicalAddress + problem->base[problem->segmentId-1];
+	if(problem->getLogicalAddress() <= problem->length[problem->getSegmentID()-1]){
+		physicalAddress = problem->getLogicalAddress() + problem->base[problem->getSegmentID()-1];
 		result = "Physical address: " + to_string(physicalAddress);
 	}
 	//input validation
