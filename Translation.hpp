@@ -26,21 +26,13 @@ public:
 	}
 };
 
-class	translation: Solver {
+class translation: Solver {
+private:
+	struct translationProblem* problem;
 public:
 	translation(struct translationProblem &problem){
 		this-> problem = &problem;
 	}
-
-	~translation(){
-		//Todo
-	}
-
 	string solve();
-
 	void print();
-
-private:
-	struct translationProblem* problem;
-
 };

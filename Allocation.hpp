@@ -38,6 +38,8 @@ private:
 };
 
 class memAllocation: Solver {
+private:
+    struct memAllocationProblem* problem;
 public:
     memAllocation(struct memAllocationProblem &problem) {
         this->problem = &problem;
@@ -45,13 +47,6 @@ public:
     ~memAllocation() {
         // TODO Auto-generated destructor stub
     }
-
     std::string solve();
-
     void print();
-
-private:
-    struct memAllocationProblem* problem;
-
 };
-

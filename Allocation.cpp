@@ -27,7 +27,7 @@ std::string solveFirstFit(std::vector<int> availableBlock, std::vector<int> proc
         }
         else {
             result += " Found no block large enough to hold process with size of " + std::to_string(processSize) 
-                    + " \n under worst fit policy \n";
+                    + " \n under first fit policy \n";
         }
     }
 
